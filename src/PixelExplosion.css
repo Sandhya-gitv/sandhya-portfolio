@@ -1,0 +1,46 @@
+
+.pixel-explosion-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pixel-particle {
+  position: absolute;
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow: 0 0 10px currentColor;
+  animation: pixel-burst var(--duration) ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes pixel-burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  65% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy))
+      )
+      rotate(180deg)
+      scale(0.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-particle {
+    animation-duration: 180ms !important;
+  }
+}
